@@ -1,13 +1,76 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %} | challenge-me</title>
+    {% block stylesheets %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.png') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800,700italic,800italic%7CMerriweather:400,400italic,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+    <header class="header">
+        <div class="background">
+            <a href="{{ url('home.index') }}" class="logo-challenge-me"></a>
+            <div class="wrap">
+                <div class="fl">
+                    <a href="/"><img class="logo logo-open" src="{{ asset('assets/images/logo.png') }}"></a>
+                    <div class="title-wrapper">
+                        <div class="header-title">Challenge-me</div>
+                        <nav class="main-nav">
+                            <ul>
+
+                                <li class=""><a href="#">problèmes</a></li>
+
+                                <li class=""><a href="#">Listes de classement</a></li>
+
+                                <li class=""><a href="#">Aidez-moi</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="user-side fr">
+                    <nav class="user-nav">
+                        <ul class="user-nav-ul">
+                            <li>
+                                <form action="#" class="site-search" method="GET">
+                                    <input type="text" name="q" placeholder="Chercher...">
+                                    <a href="#">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </form>
+                            </li>
+                            <li><a class="btn dark-bg" href="#">S'identifier</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="wrap">
+        <div class="page-content boxed clearfix">
+            <section class="box clearfix main-content">
+                {% block content %}{% endblock %}
+            </section>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="footer-powered">
+        <h4>Powered by&nbsp;Karima Ghali && **** ****</h4>
+    </div>
+</div>
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+{% endblock %}
+</body>
 </html>

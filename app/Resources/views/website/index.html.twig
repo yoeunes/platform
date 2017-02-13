@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <div class="page-headline clearfix">
+        <h1>Bienvenue a Challenge-me</h1>
+    </div>
+    <p>Juste <a href="#"> inscrivez-vous</a> et commencez à résoudre.</p>
+    <div class="clearfix">
+        <div class="col-md-6">
+            <div class="page-headline clearfix">
+                <h3>Problèmes suggérés</h3>
+            </div>
+            <table class="table table-challenge-me table-hover table-rowspan">
+                <thead>
+                <tr>
+                    <th>Difficulté<span class="wrapped-link"><a href="#">?</a></span></th>
+                    <th>Problème</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="row-header" rowspan="1">Banal</td>
+                    <td><a href="#">Hello World!</a><span class="badge fr">1.1 pt</span></td>
+                </tr>
+                <tr>
+                    <td class="row-header" rowspan="2">Facile</td>
+                    <td><a href="#">Qanat</a><span class="badge fr">1.7 pt</span></td>
+                </tr>
+                <tr>
+                    <td><a href="#">A Different Problem</a><span class="badge fr">2.0 pt</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="page-headline clearfix">
+                <h3>Classement</h3>
+            </div>
+            <table class="table table-challenge-me table-hover">
+                <thead>
+                <tr>
+                    <th class="table-min-wrap">#</th>
+                    <th>Utilisateur</th>
+                    <th class="table-min-wrap">Score<span class="wrapped-link"><a href="#">?</a></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="">
+                    <td>1</td>
+                    <td><div style="display: inline-block"><a href="#">Salma</a></div></td>
+                    <td class="table-td-align-right">293.2</td>
+                </tr>
+                <tr class="">
+                    <td>2</td>
+                    <td><div style="display: inline-block"><a href="#">Younes</a></div></td>
+                    <td class="table-td-align-right">256.1</td>
+                </tr>
+                <tr class="">
+                    <td>2</td>
+                    <td><div style="display: inline-block"><a href="#">Ensa</a></div></td>
+                    <td class="table-td-align-right">256.1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
