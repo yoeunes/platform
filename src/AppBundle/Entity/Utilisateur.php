@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -77,6 +78,35 @@ class Utilisateur
      */
     private $role;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Submission", mappedBy="utilisateur")
+     */
+    private $submissions;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Team", mappedBy="utilisateur", cascade={"persist"})
+     */
+    private $teams;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Contest", mappedBy="utilisateur", cascade={"persist"})
+     */
+    private $contests;
+
+    /**
+     * Utilisateur constructor.
+     */
+    public function __construct()
+    {
+        $this->submissions = new ArrayCollection();
+        $this->teams = new ArrayCollection();
+        $this->contests = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -279,5 +309,136 @@ class Utilisateur
     {
         return $this->role;
     }
-}
 
+    /**
+     * Add submission
+     *
+     * @param Submission $submission
+     *
+     * @return Utilisateur
+     */
+    public function addSubmission(Submission $submission)
+    {
+        if (!$this->submissions->contains($submission)) {
+            $this->submissions->add($submission);
+            $submission->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove submission
+     *
+     * @param Submission $submission
+     *
+     * @return Utilisateur
+     */
+    public function removeSubmission(Submission $submission)
+    {
+        if ($this->submissions->contains($submission)) {
+            $this->submissions->removeElement($submission);
+            $submission->setUtilisateur(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get submissions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubmissions()
+    {
+        return $this->submissions;
+    }
+
+    /**
+     * Add team
+     *
+     * @param Team $team
+     *
+     * @return Utilisateur
+     */
+    public function addTeam(Team $team)
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams->add($team);
+            $team->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param Team $team
+     *
+     * @return Utilisateur
+     */
+    public function removeTeam(Team $team)
+    {
+        if ($this->teams->contains($team)) {
+            $this->teams->removeElement($team);
+            $team->setUtilisateur(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * Add contest
+     *
+     * @param Contest $contest
+     *
+     * @return Utilisateur
+     */
+    public function addContest(Contest $contest)
+    {
+        if (!$this->contests->contains($contest)) {
+            $this->contests->add($contest);
+            $contest->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove contest
+     *
+     * @param Contest $contest
+     *
+     * @return Utilisateur
+     */
+    public function removeContest(Contest $contest)
+    {
+        if ($this->contests->contains($contest)) {
+            $this->contests->removeElement($contest);
+            $contest->setUtilisateur(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get contests
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContests()
+    {
+        return $this->contests;
+    }
+}

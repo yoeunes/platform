@@ -28,6 +28,12 @@ class Team
      */
     private $nom;
 
+    /**
+     * @var Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="teams")
+     */
+    private $utilisateur;
 
     /**
      * Get id
@@ -62,5 +68,28 @@ class Team
     {
         return $this->nom;
     }
-}
 
+    /**
+     * Set utilisateur
+     *
+     * @param Utilisateur $utilisateur
+     *
+     * @return Team
+     */
+    public function setUtilisateur(Utilisateur $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+}

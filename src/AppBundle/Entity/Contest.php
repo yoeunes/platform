@@ -35,6 +35,12 @@ class Contest
      */
     private $duree;
 
+    /**
+     * @var Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="contests")
+     */
+    private $utilisateur;
 
     /**
      * Get id
@@ -93,5 +99,28 @@ class Contest
     {
         return $this->duree;
     }
-}
 
+    /**
+     * Set utilisateur
+     *
+     * @param Utilisateur $utilisateur
+     *
+     * @return Contest
+     */
+    public function setUtilisateur(Utilisateur $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+}

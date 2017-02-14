@@ -42,6 +42,12 @@ class Submission
      */
     private $reponse;
 
+    /**
+     * @var Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="submissions")
+     */
+    private $utilisateur;
 
     /**
      * Get id
@@ -124,5 +130,28 @@ class Submission
     {
         return $this->reponse;
     }
-}
 
+    /**
+     * Set utilisateur
+     *
+     * @param Utilisateur $utilisateur
+     *
+     * @return Submission
+     */
+    public function setUtilisateur(Utilisateur $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+}

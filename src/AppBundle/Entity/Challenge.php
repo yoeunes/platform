@@ -63,7 +63,6 @@ class Challenge
      */
     private $solution;
 
-
     /**
      * Get id
      *
@@ -218,4 +217,3 @@ class Challenge
         return $this->solution;
     }
 }
-
