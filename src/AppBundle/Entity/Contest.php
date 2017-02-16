@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Challenge;
+use AppBundle\Entity\Utilisateur;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -115,39 +117,18 @@ class Contest
     }
 
     /**
-     * Set utilisateur
+     * Add utilisateur
      *
      * @param Utilisateur $utilisateur
      *
      * @return Contest
      */
-    public function setUtilisateur(Utilisateur $utilisateur = null)
+    public function addUtilisateur($utilisateur)
     {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateur
-     *
-     * @return Utilisateur
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
-    }
-
-    /**
-     * Add utilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
-     *
-     * @return Contest
-     */
-    public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
-    {
-        $this->utilisateurs[] = $utilisateur;
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->add($utilisateur);
+            $utilisateur->addContest($this);
+        }
 
         return $this;
     }
@@ -155,17 +136,24 @@ class Contest
     /**
      * Remove utilisateur
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     * @param Utilisateur $utilisateur
+     *
+     * @return Contest
      */
-    public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    public function removeUtilisateur($utilisateur)
     {
-        $this->utilisateurs->removeElement($utilisateur);
+        if ($this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->removeElement($utilisateur);
+            $utilisateur->removeContest($this);
+        }
+
+        return $this;
     }
 
     /**
      * Get utilisateurs
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getUtilisateurs()
     {
@@ -175,13 +163,16 @@ class Contest
     /**
      * Add challenge
      *
-     * @param \AppBundle\Entity\Challenge $challenge
+     * @param Challenge $challenge
      *
      * @return Contest
      */
-    public function addChallenge(\AppBundle\Entity\Challenge $challenge)
+    public function addChallenge($challenge)
     {
-        $this->challenges[] = $challenge;
+        if (!$this->challenges->contains($challenge)) {
+            $this->challenges->add($challenge);
+            $challenge->addContest($this);
+        }
 
         return $this;
     }
@@ -189,17 +180,24 @@ class Contest
     /**
      * Remove challenge
      *
-     * @param \AppBundle\Entity\Challenge $challenge
+     * @param Challenge $challenge
+     *
+     * @return Contest
      */
-    public function removeChallenge(\AppBundle\Entity\Challenge $challenge)
+    public function removeChallenge($challenge)
     {
-        $this->challenges->removeElement($challenge);
+        if ($this->challenges->contains($challenge)) {
+            $this->challenges->removeElement($challenge);
+            $challenge->removeContest($this);
+        }
+
+        return $this;
     }
 
     /**
      * Get challenges
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getChallenges()
     {

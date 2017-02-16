@@ -241,13 +241,16 @@ class Challenge
     /**
      * Add submission
      *
-     * @param \AppBundle\Entity\Submission $submission
+     * @param Submission $submission
      *
      * @return Challenge
      */
-    public function addSubmission(\AppBundle\Entity\Submission $submission)
+    public function addSubmission($submission)
     {
-        $this->submissions[] = $submission;
+        if (!$this->submissions->contains($submission)) {
+            $this->submissions->add($submission);
+            $submission->setChallenge($this);
+        }
 
         return $this;
     }
@@ -255,17 +258,24 @@ class Challenge
     /**
      * Remove submission
      *
-     * @param \AppBundle\Entity\Submission $submission
+     * @param Submission $submission
+     *
+     * @return Challenge
      */
-    public function removeSubmission(\AppBundle\Entity\Submission $submission)
+    public function removeSubmission($submission)
     {
-        $this->submissions->removeElement($submission);
+        if ($this->submissions->contains($submission)) {
+            $this->submissions->removeElement($submission);
+            $submission->setChallenge(null);
+        }
+
+        return $this;
     }
 
     /**
      * Get submissions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getSubmissions()
     {
@@ -275,13 +285,16 @@ class Challenge
     /**
      * Add contest
      *
-     * @param \AppBundle\Entity\Contest $contest
+     * @param Contest $contest
      *
      * @return Challenge
      */
-    public function addContest(\AppBundle\Entity\Contest $contest)
+    public function addContest($contest)
     {
-        $this->contests[] = $contest;
+        if (!$this->contests->contains($contest)) {
+            $this->contests->add($contest);
+            $contest->addChallenge($this);
+        }
 
         return $this;
     }
@@ -289,17 +302,24 @@ class Challenge
     /**
      * Remove contest
      *
-     * @param \AppBundle\Entity\Contest $contest
+     * @param Contest $contest
+     *
+     * @return Challenge
      */
-    public function removeContest(\AppBundle\Entity\Contest $contest)
+    public function removeContest($contest)
     {
-        $this->contests->removeElement($contest);
+        if ($this->contests->contains($contest)) {
+            $this->contests->removeElement($contest);
+            $contest->removeChallenge($this);
+        }
+
+        return $this;
     }
 
     /**
      * Get contests
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getContests()
     {

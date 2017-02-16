@@ -76,39 +76,18 @@ class Team
     }
 
     /**
-     * Set utilisateur
+     * Add utilisateur
      *
      * @param Utilisateur $utilisateur
      *
      * @return Team
      */
-    public function setUtilisateur(Utilisateur $utilisateur = null)
+    public function addUtilisateur(Utilisateur $utilisateur)
     {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateur
-     *
-     * @return Utilisateur
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
-    }
-
-    /**
-     * Add utilisateur
-     *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
-     *
-     * @return Team
-     */
-    public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
-    {
-        $this->utilisateurs[] = $utilisateur;
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->add($utilisateur);
+            $utilisateur->addTeam($this);
+        }
 
         return $this;
     }
@@ -116,17 +95,24 @@ class Team
     /**
      * Remove utilisateur
      *
-     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     * @param Utilisateur $utilisateur
+     *
+     * @return Team
      */
-    public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    public function removeUtilisateur($utilisateur)
     {
-        $this->utilisateurs->removeElement($utilisateur);
+        if ($this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->removeElement($utilisateur);
+            $utilisateur->removeTeam($this);
+        }
+
+        return $this;
     }
 
     /**
      * Get utilisateurs
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getUtilisateurs()
     {

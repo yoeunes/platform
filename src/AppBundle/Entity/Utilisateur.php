@@ -366,7 +366,7 @@ class Utilisateur
     {
         if (!$this->teams->contains($team)) {
             $this->teams->add($team);
-            $team->setUtilisateur($this);
+            $team->addUtilisateur($this);
         }
 
         return $this;
@@ -383,7 +383,7 @@ class Utilisateur
     {
         if ($this->teams->contains($team)) {
             $this->teams->removeElement($team);
-            $team->setUtilisateur(null);
+            $team->removeUtilisateur($this);
         }
 
         return $this;
@@ -392,7 +392,7 @@ class Utilisateur
     /**
      * Get teams
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getTeams()
     {

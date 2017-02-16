@@ -145,7 +145,7 @@ class Submission
      *
      * @return Submission
      */
-    public function setUtilisateur(Utilisateur $utilisateur = null)
+    public function setUtilisateur($utilisateur = null)
     {
         $this->utilisateur = $utilisateur;
 
@@ -165,11 +165,11 @@ class Submission
     /**
      * Set challenge
      *
-     * @param \AppBundle\Entity\Challenge $challenge
+     * @param Challenge $challenge
      *
      * @return Submission
      */
-    public function setChallenge(\AppBundle\Entity\Challenge $challenge = null)
+    public function setChallenge($challenge = null)
     {
         $this->challenge = $challenge;
 
@@ -179,7 +179,7 @@ class Submission
     /**
      * Get challenge
      *
-     * @return \AppBundle\Entity\Challenge
+     * @return Challenge
      */
     public function getChallenge()
     {
