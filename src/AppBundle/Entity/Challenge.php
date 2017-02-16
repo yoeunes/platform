@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +63,26 @@ class Challenge
      * @ORM\Column(name="solution", type="text")
      */
     private $solution;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Submission", mappedBy="challenge")
+     */
+    private $submissions;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Contest", mappedBy="challenges")
+     */
+    private $contests;
+
+    public function __construct()
+    {
+        $this->submissions = new ArrayCollection();
+        $this->contests = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -215,5 +236,73 @@ class Challenge
     public function getSolution()
     {
         return $this->solution;
+    }
+
+    /**
+     * Add submission
+     *
+     * @param \AppBundle\Entity\Submission $submission
+     *
+     * @return Challenge
+     */
+    public function addSubmission(\AppBundle\Entity\Submission $submission)
+    {
+        $this->submissions[] = $submission;
+
+        return $this;
+    }
+
+    /**
+     * Remove submission
+     *
+     * @param \AppBundle\Entity\Submission $submission
+     */
+    public function removeSubmission(\AppBundle\Entity\Submission $submission)
+    {
+        $this->submissions->removeElement($submission);
+    }
+
+    /**
+     * Get submissions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubmissions()
+    {
+        return $this->submissions;
+    }
+
+    /**
+     * Add contest
+     *
+     * @param \AppBundle\Entity\Contest $contest
+     *
+     * @return Challenge
+     */
+    public function addContest(\AppBundle\Entity\Contest $contest)
+    {
+        $this->contests[] = $contest;
+
+        return $this;
+    }
+
+    /**
+     * Remove contest
+     *
+     * @param \AppBundle\Entity\Contest $contest
+     */
+    public function removeContest(\AppBundle\Entity\Contest $contest)
+    {
+        $this->contests->removeElement($contest);
+    }
+
+    /**
+     * Get contests
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContests()
+    {
+        return $this->contests;
     }
 }

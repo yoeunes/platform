@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,16 +32,29 @@ class Contest
     /**
      * @var int
      *
-     * @ORM\Column(name="duree", type="int")
+     * @ORM\Column(name="duree", type="integer")
      */
     private $duree;
 
     /**
-     * @var Utilisateur
+     * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="contests")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="contests")
      */
-    private $utilisateur;
+    private $utilisateurs;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Challenge", inversedBy="contests")
+     */
+    private $challenges;
+
+    public function __construct()
+    {
+        $this->utilisateurs = new ArrayCollection();
+        $this->challenges = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -122,5 +136,73 @@ class Contest
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    /**
+     * Add utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Contest
+     */
+    public function addUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateurs[] = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Remove utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     */
+    public function removeUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateurs->removeElement($utilisateur);
+    }
+
+    /**
+     * Get utilisateurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUtilisateurs()
+    {
+        return $this->utilisateurs;
+    }
+
+    /**
+     * Add challenge
+     *
+     * @param \AppBundle\Entity\Challenge $challenge
+     *
+     * @return Contest
+     */
+    public function addChallenge(\AppBundle\Entity\Challenge $challenge)
+    {
+        $this->challenges[] = $challenge;
+
+        return $this;
+    }
+
+    /**
+     * Remove challenge
+     *
+     * @param \AppBundle\Entity\Challenge $challenge
+     */
+    public function removeChallenge(\AppBundle\Entity\Challenge $challenge)
+    {
+        $this->challenges->removeElement($challenge);
+    }
+
+    /**
+     * Get challenges
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChallenges()
+    {
+        return $this->challenges;
     }
 }

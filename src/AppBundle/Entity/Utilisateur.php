@@ -87,14 +87,15 @@ class Utilisateur
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Team", mappedBy="utilisateur", cascade={"persist"})
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Team", mappedBy="utilisateurs")
      */
     private $teams;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Contest", mappedBy="utilisateur", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Contest", mappedBy="utilisateurs")
      */
     private $contests;
 

@@ -50,6 +50,13 @@ class Submission
     private $utilisateur;
 
     /**
+     * @var Challenge
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Challenge", inversedBy="submissions")
+     */
+    private $challenge;
+
+    /**
      * Get id
      *
      * @return int
@@ -153,5 +160,29 @@ class Submission
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    /**
+     * Set challenge
+     *
+     * @param \AppBundle\Entity\Challenge $challenge
+     *
+     * @return Submission
+     */
+    public function setChallenge(\AppBundle\Entity\Challenge $challenge = null)
+    {
+        $this->challenge = $challenge;
+
+        return $this;
+    }
+
+    /**
+     * Get challenge
+     *
+     * @return \AppBundle\Entity\Challenge
+     */
+    public function getChallenge()
+    {
+        return $this->challenge;
     }
 }
