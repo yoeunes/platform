@@ -318,7 +318,7 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-    public function addSubmission(Submission $submission)
+    public function addSubmission($submission)
     {
         if (!$this->submissions->contains($submission)) {
             $this->submissions->add($submission);
@@ -335,7 +335,7 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-    public function removeSubmission(Submission $submission)
+    public function removeSubmission($submission)
     {
         if ($this->submissions->contains($submission)) {
             $this->submissions->removeElement($submission);
@@ -348,7 +348,7 @@ class Utilisateur
     /**
      * Get submissions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getSubmissions()
     {
@@ -362,11 +362,10 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-    public function addTeam(Team $team)
+    public function addTeam($team)
     {
         if (!$this->teams->contains($team)) {
             $this->teams->add($team);
-            $team->addUtilisateur($this);
         }
 
         return $this;
@@ -379,11 +378,10 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-    public function removeTeam(Team $team)
+    public function removeTeam($team)
     {
         if ($this->teams->contains($team)) {
             $this->teams->removeElement($team);
-            $team->removeUtilisateur($this);
         }
 
         return $this;
@@ -406,11 +404,10 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-    public function addContest(Contest $contest)
+    public function addContest($contest)
     {
         if (!$this->contests->contains($contest)) {
             $this->contests->add($contest);
-            $contest->setUtilisateur($this);
         }
 
         return $this;
@@ -423,11 +420,10 @@ class Utilisateur
      *
      * @return Utilisateur
      */
-    public function removeContest(Contest $contest)
+    public function removeContest($contest)
     {
         if ($this->contests->contains($contest)) {
             $this->contests->removeElement($contest);
-            $contest->setUtilisateur(null);
         }
 
         return $this;
@@ -436,7 +432,7 @@ class Utilisateur
     /**
      * Get contests
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getContests()
     {

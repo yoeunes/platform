@@ -82,7 +82,7 @@ class Team
      *
      * @return Team
      */
-    public function addUtilisateur(Utilisateur $utilisateur)
+    public function addUtilisateur($utilisateur)
     {
         if (!$this->utilisateurs->contains($utilisateur)) {
             $this->utilisateurs->add($utilisateur);

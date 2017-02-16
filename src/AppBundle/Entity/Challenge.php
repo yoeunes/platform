@@ -293,7 +293,6 @@ class Challenge
     {
         if (!$this->contests->contains($contest)) {
             $this->contests->add($contest);
-            $contest->addChallenge($this);
         }
 
         return $this;
@@ -310,7 +309,6 @@ class Challenge
     {
         if ($this->contests->contains($contest)) {
             $this->contests->removeElement($contest);
-            $contest->removeChallenge($this);
         }
 
         return $this;

@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Challenge;
-use AppBundle\Entity\Utilisateur;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
