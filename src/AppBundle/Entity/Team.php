@@ -32,13 +32,13 @@ class Team
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="teams")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="teams")
      */
-    private $utilisateurs;
+    private $users;
 
     public function __construct()
     {
-        $this->utilisateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -76,46 +76,46 @@ class Team
     }
 
     /**
-     * Add utilisateur
+     * Add user
      *
-     * @param Utilisateur $utilisateur
+     * @param User $user
      *
      * @return Team
      */
-    public function addUtilisateur($utilisateur)
+    public function addUser($user)
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addTeam($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addTeam($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove utilisateur
+     * Remove user
      *
-     * @param Utilisateur $utilisateur
+     * @param User $user
      *
      * @return Team
      */
-    public function removeUtilisateur($utilisateur)
+    public function removeUser($user)
     {
-        if ($this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->removeElement($utilisateur);
-            $utilisateur->removeTeam($this);
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeTeam($this);
         }
 
         return $this;
     }
 
     /**
-     * Get utilisateurs
+     * Get users
      *
      * @return ArrayCollection
      */
-    public function getUtilisateurs()
+    public function getUsers()
     {
-        return $this->utilisateurs;
+        return $this->users;
     }
 }

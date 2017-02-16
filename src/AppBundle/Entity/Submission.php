@@ -43,11 +43,11 @@ class Submission
     private $reponse;
 
     /**
-     * @var Utilisateur
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="submissions")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="submissions")
      */
-    private $utilisateur;
+    private $user;
 
     /**
      * @var Challenge
@@ -139,27 +139,27 @@ class Submission
     }
 
     /**
-     * Set utilisateur
+     * Set user
      *
-     * @param Utilisateur $utilisateur
+     * @param User $user
      *
      * @return Submission
      */
-    public function setUtilisateur($utilisateur = null)
+    public function setUser($user = null)
     {
-        $this->utilisateur = $utilisateur;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get utilisateur
+     * Get user
      *
-     * @return Utilisateur
+     * @return User
      */
-    public function getUtilisateur()
+    public function getUser()
     {
-        return $this->utilisateur;
+        return $this->user;
     }
 
     /**

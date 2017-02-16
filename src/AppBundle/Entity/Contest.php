@@ -39,9 +39,9 @@ class Contest
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="contests")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="contests")
      */
-    private $utilisateurs;
+    private $users;
 
     /**
      * @var ArrayCollection
@@ -52,7 +52,7 @@ class Contest
 
     public function __construct()
     {
-        $this->utilisateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->challenges = new ArrayCollection();
     }
 
@@ -115,47 +115,47 @@ class Contest
     }
 
     /**
-     * Add utilisateur
+     * Add user
      *
-     * @param Utilisateur $utilisateur
+     * @param User $user
      *
      * @return Contest
      */
-    public function addUtilisateur($utilisateur)
+    public function addUser($user)
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->addContest($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addContest($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove utilisateur
+     * Remove user
      *
-     * @param Utilisateur $utilisateur
+     * @param User $user
      *
      * @return Contest
      */
-    public function removeUtilisateur($utilisateur)
+    public function removeUser($user)
     {
-        if ($this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->removeElement($utilisateur);
-            $utilisateur->removeContest($this);
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeContest($this);
         }
 
         return $this;
     }
 
     /**
-     * Get utilisateurs
+     * Get users
      *
      * @return ArrayCollection
      */
-    public function getUtilisateurs()
+    public function getUsers()
     {
-        return $this->utilisateurs;
+        return $this->users;
     }
 
     /**
